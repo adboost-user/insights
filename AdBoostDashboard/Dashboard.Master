@@ -1,0 +1,671 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.master.cs" Inherits="AdBoostDashboard.Dashboard" %>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AdBoost | Dashboard</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+     <!-- Toastr style -->
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+     <!-- FooTable -->
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+    <!-- Lightbox bootstrap-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element"> <span>
+                            <%--<img alt="image" class="img-circle" src="img/profile_small.jpg">--%>
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                            <span class="clear"> 
+                                <span class="block m-t-xs"> <strong class="font-bold"><asp:Literal ID="LitNombre" runat="server"></asp:Literal></strong>
+                             </span> 
+                                <span class="text-muted text-xs block"><asp:Literal ID="LitCompany" runat="server"></asp:Literal><b class="caret"></b></span> 
+                                <%--<span class="text-muted text-xs block">Loto <b class="caret"></b></span>--%>
+                            </span> 
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <%--<li><a href="profile.html">Profile</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="mailbox.html">Mailbox</a></li>--%>
+                            <li class="divider"></li>
+                            <li><%--<a href="login.html">Logout</a>--%></li>
+                            <li><asp:HyperLink ID="HyperLink2" runat="server" href="logout.aspx"> Salir</asp:HyperLink></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        ab+
+                    </div>
+                </li>
+                                          
+                <%     
+                    if (Session["privilegio"].ToString() == "100")
+                    {
+                %>
+                <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Campañas</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="LbCampañasCargadas" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>
+                <li >
+                    <a href="index.html"><i class="fa fa-sitemap"></i> <span class="nav-label">Compañias</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="LitCompañias" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>                
+                <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">LineItem</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal1" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>
+                <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">LICreative</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal2" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>
+                <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Creative</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal3" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>
+                 <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Ad units</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal4" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>
+                 <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Inventory Targeting</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal5" runat="server"></asp:Literal>                     
+                    </ul>
+                </li>   
+                 <li >
+                    <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Other Targeting</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal6" runat="server"></asp:Literal>                     
+                    </ul>
+                </li> 
+                <%
+                    }
+                %>
+               
+                                           
+                <%     
+                    if (Session["privilegio"].ToString() == "1000")
+                    {
+                %>
+                <li >
+                    <a href="#"><i class="fa fa-cart-plus"></i> <span class="nav-label">Campañas</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="LitOrders" runat="server"></asp:Literal>                     
+                    </ul>                    
+                </li>
+                 <li >
+                    <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Reportes</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="Reports.aspx">Descargar Reportes</a>
+                        </li>                       
+                        
+                    </ul>                    
+                </li>
+                 <%
+                    }
+                %>
+
+                       <%     
+                    if (Session["privilegio"].ToString() == "9000")
+                    {
+                %>
+                 <li >
+                    <a href="#"><i class="fa fa-cart-plus"></i> <span class="nav-label">Campañas</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <asp:Literal ID="Literal7" runat="server"></asp:Literal>                     
+                    </ul>                    
+                </li>
+                <li >
+                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuarios</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="CrearUSuario.aspx">Crear Usuarios</a>
+                        </li>
+                        <li>
+                            <a href="#">Lista de Usuarios</a>
+                        </li>
+                        
+                    </ul>                    
+                </li>
+                <li >
+                    <a href="#"><i class="fa fa-building"></i> <span class="nav-label">Compañias</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="CrearCompañia.aspx">Crear Compañias</a>
+                        </li>
+                        <li>
+                            <a href="#">Lista de Compañias</a>
+                        </li>                  
+                    </ul>                    
+                </li>
+                 <%
+                    }
+                %>
+                
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">                
+                <div class="form-group">
+                    <%--<input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">--%>
+                    <a href="Default.aspx"><img alt="image" class="img-responsive" src="img/db-logo-adboost.png"></a>
+                </div>
+            </form>
+            <div runat="server" id="HideDiv" style="display: none;"></div>
+            
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Bienvenido a la Consola de Adboost</span>
+                </li>
+           
+
+
+                <li>
+                    <%--<a href="login.html">--%>
+                        
+                    <asp:HyperLink ID="HyperLink1" runat="server" href="logout.aspx"><i class="fa fa-sign-out"></i> Salir</asp:HyperLink>
+                        
+                    <%--</a>--%>
+                </li>
+                <%--<li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>--%>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="wrapper wrapper-content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        <div class="footer">
+            <div class="pull-right">
+               <strong>Copyright</strong> Adboost &copy; 2016
+            </div>
+            <div>
+                
+            </div>
+        </div>
+        </div>
+       
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="js/plugins/flot/jquery.flot.symbol.js"></script>
+    <script src="js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Peity -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Jvectormap -->
+    <script src="js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- EayPIE -->
+    <script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+    <!-- Sparkline -->
+    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="js/demo/sparkline-demo.js"></script>
+    <!-- Date range use moment.js same as full calendar plugin -->
+    <script src="js/plugins/fullcalendar/moment.min.js"></script>
+   
+      <!-- Date range picker -->
+    <script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+    <!--Lightbox javascript Copyright (c) 2011-2015 ashleydw-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.footable').footable();
+            $('.footable2').footable();            
+            $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+
+
+            var Filtro2 = $("#ContentPlaceHolder1_HideDivFiltro").text();
+            //alert(location.pathname.substring(1));
+            var ubicacion = location.pathname.substring(1);
+            if ((ubicacion == "Default.aspx" || ubicacion=="default.aspx") || (Filtro2 == "1")) {
+                
+                function addAllColumnHeaders(myList) {
+                    var columnSet = [];
+                    var headerTr$ = $('<tr/>');
+
+                    for (var i = 0; i < myList.length; i++) {
+                        var rowHash = myList[i];
+                        for (var key in rowHash) {
+                            if ($.inArray(key, columnSet) == -1) {
+                                columnSet.push(key);
+                                headerTr$.append($('<th/>').html(key));
+                            }
+                        }
+                    }
+                    $("#jsonTable").append(headerTr$);
+
+                    return columnSet;
+                }
+                var CompanyId = $("#HideDiv").text();
+                var URL = "http://localhost:49791/Orders.aspx?Option=LbGetOrder&vCompanyId=" + CompanyId;
+                $.getJSON(URL, function (data) {
+
+
+                    var columns = addAllColumnHeaders(data);
+                    var link = '';
+                    //console.log(indice);
+                    for (var i = 0; i < data.length; i++) {
+
+                        var row$ = $('<tr/>');
+                        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+                            var cellValue = data[i][columns[colIndex]];
+                            if (cellValue == null) { cellValue = ""; }                            
+                            
+                            //row$.append($('<td>'));
+                            /*if (colIndex == 0) {
+                                link = '<a href="OrderItem.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                //row$.append($('<td class="hit"/>').html('<a href="ordenes.aspx?id=1">' + cellValue + '</a>'));}
+                                row$.append($('<td class="hit"/>').html(link));
+                            }
+                            else{
+                                row$.append($('<td/>').html(cellValue));
+                            }*/
+                            switch (colIndex)
+                            {
+                                case 0:link = '<a href="OrderItem.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                                case 2: link = '<a href="LineItemDetail.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    var LineId = cellValue;
+                                    console.log(LineId);
+                                    break;
+                                case 7: link = '<a href="CreativeDetail.aspx?id=' + LineId + '">' + "Ver Detalle" + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                                default: row$.append($('<td/>').html(cellValue));
+                            }
+                            
+
+                        }
+                        //row$.append($('<td/>').html(link));
+                        $("#jsonTable").append(row$);
+                    }
+                    //$('td').prepend('<a href="default.aspx"/>');
+                });
+            }
+
+
+            /*
+
+            ***************codigo insertado para tabla en orders
+
+            */
+
+
+            /*
+
+        ***************codigo insertado para tabla en ordenes por filtro
+
+        */
+            var ubicacion1 = location.pathname.substring(1);
+            if (ubicacion1 == "ordenes.aspx" || ubicacion == "Ordenes.aspx") {
+                function addAllColumnHeaders2(myList) {
+                    var columnSet = [];
+                    var headerTr$ = $('<tr/>');
+
+                    for (var i = 0; i < myList.length; i++) {
+                        var rowHash = myList[i];
+                        for (var key in rowHash) {
+                            if ($.inArray(key, columnSet) == -1) {
+                                columnSet.push(key);
+                                headerTr$.append($('<th/>').html(key));
+                            }
+                        }
+                    }
+                    $("#jsonTableOrders").append(headerTr$);
+
+                    return columnSet;
+                }
+                var CompanyId = $("#HideDiv").text();
+                var Filtro = $("#ContentPlaceHolder1_HideDivFiltro").text();
+                var URL = "http://localhost:49791/Orders.aspx?Option=GetLineItemsFilter&vCompanyId=" + CompanyId + "&vFiltro=" + Filtro;
+
+                $.getJSON(URL, function (data) {
+
+
+                    var columns = addAllColumnHeaders2(data);
+                    //console.log(indice);
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+
+                            var row$ = $('<tr/>');
+                            for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+                                var cellValue = data[i][columns[colIndex]];
+                                if (cellValue == null) { cellValue = ""; }
+                                //row$.append($('<td/>').html(cellValue));
+                                switch (colIndex) {
+                                    case 0: link = '<a href="OrderItem.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                        row$.append($('<td class="hit"/>').html(link));
+                                        break;
+                                    case 2: link = '<a href="LineItemDetail.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                        row$.append($('<td class="hit"/>').html(link));
+                                        break;
+                                    case 7: link = '<a href="' + cellValue + '"' + 'target="_blank">' + "Ver Detalle" + '</a>';
+                                        row$.append($('<td class="hit"/>').html(link));
+                                    default: row$.append($('<td/>').html(cellValue));
+                                }
+
+                            }
+                            $("#jsonTableOrders").append(row$);
+                        }
+                    }
+
+                });
+            }
+            /*
+            *********************** para tabla orders en OrderItem.aspx
+            */
+            var ubicacionOrderItem = location.pathname.substring(1);
+            //console.log(ubicacionOrderItem);
+            if (ubicacionOrderItem == "OrderItem.aspx" || ubicacion == "orderItem.aspx") {
+                function addAllColumnHeaders(myList) {
+                    var columnSet = [];
+                    var headerTr$ = $('<tr/>');
+
+                    for (var i = 0; i < myList.length; i++) {
+                        var rowHash = myList[i];
+                        for (var key in rowHash) {
+                            if ($.inArray(key, columnSet) == -1) {
+                                columnSet.push(key);
+                                headerTr$.append($('<th/>').html(key));
+                            }
+                        }
+                    }
+                    $("#jsonTable").append(headerTr$);
+
+                    return columnSet;
+                }
+                var OrderID = $("#ContentPlaceHolder1_HideDivFiltro").text();
+               // console.log(OrderID);
+                var URL = "http://localhost:49791/Orders.aspx?Option=GetOrdersFiltered&vOrderID=" + OrderID;
+                $.getJSON(URL, function (data) {
+
+
+                    var columns = addAllColumnHeaders(data);
+                    var link = '';
+                    //console.log(indice);
+                    for (var i = 0; i < data.length; i++) {
+
+                        var row$ = $('<tr/>');
+                        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+                            var cellValue = data[i][columns[colIndex]];
+                            if (cellValue == null) { cellValue = ""; }
+
+                            //row$.append($('<td>'));
+                            switch (colIndex) {
+                                case 0: link = '<a href="OrderItem.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                                case 2: link = '<a href="LineItemDetail.aspx?id=' + cellValue + '">' + cellValue + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                                case 7: link = '<a href="' + cellValue + '"' + 'target="_blank">' + "Ver Detalle" + '</a>';                                    
+                                    row$.append($('<td class="hit"/>').html(link));
+                                default: row$.append($('<td/>').html(cellValue));
+                            }
+
+                        }                        
+                        $("#jsonTable").append(row$);
+                    }
+                    //$('td').prepend('<a href="default.aspx"/>');
+                });
+            }
+
+
+            /*
+            ***********************
+            */
+
+            /*
+           *********************** para tabla orders en LineItemDetail.aspx
+           */
+            var ubicacionLineItem = location.pathname.substring(1);
+            //console.log(ubicacionOrderItem);
+            if (ubicacionLineItem == "LineItemDetail.aspx" || ubicacion == "lineItemDetail.aspx") {
+                function addAllColumnHeaders(myList) {
+                    var columnSet = [];
+                    var headerTr$ = $('<tr/>');
+
+                    for (var i = 0; i < myList.length; i++) {
+                        var rowHash = myList[i];
+                        for (var key in rowHash) {
+                            if ($.inArray(key, columnSet) == -1) {
+                                columnSet.push(key);
+                                headerTr$.append($('<th/>').html(key));
+                            }
+                        }
+                    }
+                    $("#jsonTable").append(headerTr$);
+
+                    return columnSet;
+                }
+                var LineId = $("#ContentPlaceHolder1_HideDivFiltro").text();
+                // console.log(OrderID);
+                var URL = "http://localhost:49791/Orders.aspx?Option=GetCreativesByLine&vLineID=" + LineId;
+                $.getJSON(URL, function (data) {
+
+
+                    var columns = addAllColumnHeaders(data);
+                    var link = '';
+                    //console.log(indice);
+                    for (var i = 0; i < data.length; i++) {
+
+                        var row$ = $('<tr/>');
+                        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+                            var cellValue = data[i][columns[colIndex]];
+                            if (cellValue == null) { cellValue = ""; }
+                            switch (colIndex) {
+                                case 0:
+                                    var TitleCreat = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 2:
+                                    var TotImpre = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 3:
+                                    var TotClics = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 4:
+                                    var TotCtr = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                    //case 5: link = '<a href="' + cellValue + '"' + 'target="_blank">' + "Ver Creatividad" + '</a>';
+                                case 5:
+                                    var LightboxTitle = TitleCreat;
+                                    var Lightboxfooter = "Impresiones: " + TotImpre +
+                                        " | Clics: " + TotClics + " | CTR: " + TotCtr;
+                                    //link = '<a href="' + cellValue + '"' + 'data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">'
+                                    link = '<a href="' + cellValue + '"' + 'data-toggle="lightbox" data-title="' + LightboxTitle + '"' + ' data-footer="' + Lightboxfooter + '">'
+                                    + "Ver Creatividad" + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                                default: row$.append($('<td/>').html(cellValue));
+                            }
+                        }
+                        $("#jsonTable").append(row$);
+                    }
+                    //$('td').prepend('<a href="default.aspx"/>');
+                });
+            }
+
+
+            /*
+            ***********************
+            */
+            /*
+          *********************** para tabla orders en CreativeDetail.aspx
+          */
+            var ubicacionLineItem = location.pathname.substring(1);
+            //console.log(ubicacionOrderItem);
+            if (ubicacionLineItem == "CreativeDetail.aspx" || ubicacion == "creativeDetail.aspx") {
+                function addAllColumnHeaders(myList) {
+                    var columnSet = [];
+                    var headerTr$ = $('<tr/>');
+
+                    for (var i = 0; i < myList.length; i++) {
+                        var rowHash = myList[i];
+                        for (var key in rowHash) {
+                            if ($.inArray(key, columnSet) == -1) {
+                                columnSet.push(key);
+                                headerTr$.append($('<th/>').html(key));
+                            }
+                        }
+                    }
+                    $("#jsonTable").append(headerTr$);
+
+                    return columnSet;
+                }
+                var LineId = $("#ContentPlaceHolder1_HideDivFiltro").text();
+                // console.log(OrderID);
+                var URL = "http://localhost:49791/Orders.aspx?Option=GetCreativesByLine&vLineID=" + LineId;
+                $.getJSON(URL, function (data) {
+
+
+                    var columns = addAllColumnHeaders(data);
+                    var link = '';
+                    //console.log(indice);
+                    for (var i = 0; i < data.length; i++) {
+
+                        var row$ = $('<tr/>');
+                        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+
+                            var cellValue = data[i][columns[colIndex]];
+                            if (cellValue == null) { cellValue = ""; }
+                            switch (colIndex) {
+                                case 0:
+                                    var TitleCreat = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 2:
+                                    var TotImpre = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 3:
+                                    var TotClics = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                case 4:
+                                    var TotCtr = cellValue;
+                                    row$.append($('<td/>').html(cellValue));
+                                    break;
+                                //case 5: link = '<a href="' + cellValue + '"' + 'target="_blank">' + "Ver Creatividad" + '</a>';
+                                case 5:
+                                    var LightboxTitle = TitleCreat;
+                                    var Lightboxfooter = "Impresiones: " + TotImpre +
+                                        " | Clics: " + TotClics + " | CTR: " + TotCtr;
+                                    //link = '<a href="' + cellValue + '"' + 'data-toggle="lightbox" data-title="A random title" data-footer="A custom footer text">'
+                                    link = '<a href="' + cellValue + '"' + 'data-toggle="lightbox" data-title="' + LightboxTitle + '"' + ' data-footer="' + Lightboxfooter + '" data-width="640">'
+                                    + "Ver Creatividad" + '</a>';
+                                    row$.append($('<td class="hit"/>').html(link));
+                                    break;
+                            default: row$.append($('<td/>').html(cellValue));
+                            }
+                        }
+                        $("#jsonTable").append(row$);
+                    }
+                    //$('td').prepend('<a href="default.aspx"/>');
+                });
+            }
+
+
+            /*
+            ***********************
+            */
+
+            /*
+
+            ***************codigo insertado para tabla en ordenes por filtro
+
+            */
+           /* $("tr").click(function () {
+                window.location.href = $(this).find("a").attr("href");
+            });*/
+
+        });
+    </script>
+</body>
+</html>
